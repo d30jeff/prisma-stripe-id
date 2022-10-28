@@ -17,6 +17,8 @@ model Owner {
   Cats      Cat[]
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([ID])
 }
 
 model Cat {
@@ -26,4 +28,6 @@ model Cat {
   Owner     Owner    @relation(fields: [ownerID], references: [ID], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([ID, ownerID])
 }
