@@ -1,0 +1,5 @@
+-- DropForeignKey
+ALTER TABLE "Cat" DROP CONSTRAINT "Cat_ownerID_fkey";
+
+-- AddForeignKey
+ALTER TABLE "Cat" ADD CONSTRAINT "Cat_ownerID_fkey" FOREIGN KEY ("ownerID") REFERENCES "Owner"("ID") ON DELETE CASCADE ON UPDATE CASCADE;

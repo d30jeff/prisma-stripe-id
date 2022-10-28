@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["interactiveTransactions"]
 }
 
@@ -11,9 +11,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Owner {
+  ID        String   @id
+  fullName  String
+  Cats      Cat[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
 model Cat {
-  ID String @id
-  name String
+  ID        String   @id
+  name      String
+  ownerID   String
+  Owner     Owner    @relation(fields: [ownerID], references: [ID], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
