@@ -56,7 +56,7 @@ const prismaReadConnection = new PrismaClient({
 });
 
 prismaWriteConnection.$use(async (params, next) => {
-  if (params.args.data) {
+  if (params.args.data && ['create', 'createMany'].includes(params.action)) {
     let data = [];
     if (params.args.data.constructor === Array) {
       data = params.args.data;
